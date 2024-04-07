@@ -1,6 +1,6 @@
 package com.example.review.config;
 
-import com.example.review.jobs.GetPlaceDetailsJob;
+import com.example.review.jobs.SearchPlaceJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class QuartzConfig {
     @Bean
     public JobDetail getPlaceDetail() {
-        return JobBuilder.newJob(GetPlaceDetailsJob.class)
+        return JobBuilder.newJob(SearchPlaceJob.class)
                 .storeDurably()
                 .build();
     }
@@ -17,9 +17,8 @@ public class QuartzConfig {
     @Bean
     public Trigger getPlaceDetailTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
-//                .withIntervalInHours(24)
-                .withIntervalInSeconds(3)
-                .repeatForever();
+                .withIntervalInHours(1)
+                .withRepeatCount(1);
 
         return TriggerBuilder.newTrigger()
                 .forJob(getPlaceDetail())
