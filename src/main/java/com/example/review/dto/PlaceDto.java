@@ -14,4 +14,8 @@ import java.util.Map;
 public class PlaceDto {
     private String id;
     private Map<String, String> displayName;
+    private float rating;
+    private int userRatingCount;
+    private String googleMapsUri;
+    private String websiteUri;
 }
